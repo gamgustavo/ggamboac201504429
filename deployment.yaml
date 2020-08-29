@@ -5,21 +5,21 @@ name: hello
 labels:
   app: hello
 spec:
-strategy:
-  type: Recreate
-template:
-  metadata:
-    labels:
-      app: hello
-      tier: hello
-  spec:
-    containers:
-    - name: hello
-      image: gustavogamboa/hello:latest
-      imagePullPolicy: Always
-      ports:
-      - containerPort: 5000
-        name: hello
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: hello
+        tier: hello
+    spec:
+      containers:
+      - name: hello
+        image: gustavogamboa/hello:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+          name: hello
 
 ---
 apiVersion: v1
@@ -29,10 +29,10 @@ name: hello
 labels:
   app: hello
 spec:
-ports:
-  - port: 5000
-    targetPort: 5000
-selector:
-  app: hello
-  tier: hello
-type: LoadBalancer
+  ports:
+    - port: 5000
+      targetPort: 5000
+  selector:
+    app: hello
+    tier: hello
+  type: LoadBalancer
