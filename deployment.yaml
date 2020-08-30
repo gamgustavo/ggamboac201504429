@@ -3,14 +3,14 @@ kind: Service
 metadata:
   name: hello
   labels:
-    app: hello
+    run: hello
 spec:
   ports:
   - port: 5000
     targetPort: 5000
     protocol: TCP
   selector:
-    app: hello
+    run: hello
   type: LoadBalancer
 ---
 apiVersion: apps/v1
