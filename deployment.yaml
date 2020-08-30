@@ -4,6 +4,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: hello
+  labels:
+    app: hello
 spec:
   strategy:
     type: Recreate
@@ -35,7 +37,6 @@ spec:
   ports:
   - port: 5000
     targetPort: 5000
-    protocol: TCP
   selector:
     app: hello
     run: hello
