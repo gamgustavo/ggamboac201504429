@@ -1,42 +1,36 @@
-
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hello
-  labels:
-    app: hello
+  name: hello-app
 spec:
-  strategy:
-    type: Recreate
   selector:
     matchLabels:
-      app: hello    
+      app: hello
+  replicas: 3
   template:
     metadata:
       labels:
         app: hello
-        tier: hello
     spec:
       containers:
       - name: hello
-        image: gustavogamboa/hello:latest
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 5000
-          name: hello
+        image: "gustavogamboa/hello:latest"
+
 ---
+
 apiVersion: v1
 kind: Service
 metadata:
-  name: hello
+  name: ilb-service
+  annotations:
+    cloud.google.com/load-balancer-type: "External"
   labels:
     app: hello
 spec:
-  ports:
-  - port: 5000
-    targetPort: 5000
+  type: LoadBalancer
   selector:
     app: hello
-    run: hello
-  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 5000
+    protocol: TCP
