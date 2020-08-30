@@ -15,6 +15,7 @@ spec:
     metadata:
       labels:
         app: hello
+        tier: hello
     spec:
       containers:
       - name: hello
@@ -22,18 +23,20 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
+          name: hello
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: hello
   labels:
-    run: hello
+    app: hello
 spec:
   ports:
   - port: 5000
     targetPort: 5000
     protocol: TCP
   selector:
+    app: hello
     run: hello
   type: LoadBalancer
