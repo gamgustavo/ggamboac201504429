@@ -1,18 +1,5 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: hello
-  labels:
-    run: hello
-spec:
-  ports:
-  - port: 5000
-    targetPort: 5000
-    protocol: TCP
-  selector:
-    run: hello
-  type: LoadBalancer
----
+
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -20,7 +7,7 @@ metadata:
 spec:
   strategy:
     type: Recreate
-  replicas: 3
+  replicas: 4
   selector:
     matchLabels:
       app: hello    
@@ -35,3 +22,18 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello
+  labels:
+    run: hello
+spec:
+  ports:
+  - port: 5000
+    targetPort: 5000
+    protocol: TCP
+  selector:
+    run: hello
+  type: LoadBalancer
