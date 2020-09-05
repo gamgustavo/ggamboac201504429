@@ -11,7 +11,7 @@ pipeline {
         LOCATION_TEST = 'us-east1-c'
 
         CLUSTER_NAME_PROD = 'devops-demo-prod'
-        LOCATION_PROD = 'us-west1-a '
+        LOCATION_PROD = 'us-west1-a'
                        
     }
     stages {
