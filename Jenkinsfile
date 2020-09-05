@@ -14,8 +14,7 @@ pipeline {
         }
         stage("Install Dependencies") {
             steps {
-                sh "npm install"
-                sh "npm install mocha -g"                
+                sh "npm install"    
                 sh "npm install mocha --save"                                
             }
         }        
