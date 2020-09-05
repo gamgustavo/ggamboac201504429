@@ -12,6 +12,18 @@ pipeline {
                 checkout scm
             }
         }
+        stage("Install Dependencies") {
+            steps {
+                sh "npm install"
+                sh "npm install mocha -g"                
+                sh "npm install mocha --save"                                
+            }
+        }        
+        stage("Run Test") {
+            steps {
+                sh "npm run test"
+            }
+        }                
         stage("Build image") {
             steps {
                 script {

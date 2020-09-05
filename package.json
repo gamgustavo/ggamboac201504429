@@ -1,12 +1,21 @@
 {
-  "name": "simple-node-app",
+  "name": "devops-demo",
   "version": "1.0.0",
-  "description": "Node.js on Docker",
-  "main": "server.js",
+  "description": "nodejs devops",
+  "author": "Gustavo Adolfo Gamboa Cruz <holagamboatavo@gmail.com>",
+  "license": "MIT",
+  "main": "app.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node app.js",
+    "test": "mocha"
   },
+  "keywords": [
+    "nodejs",
+    "bootstrap",
+    "express"
+  ],
   "dependencies": {
-    "express": "^4.13"
+    "express": "^4.16.4",
+    "mocha": "^8.1.3"
   }
 }

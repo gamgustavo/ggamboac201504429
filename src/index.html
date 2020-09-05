@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Dashboard - SB Admin</title>
+        <link href="css/styles.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <a class="navbar-brand" href="index.html">Start Bootstrap</a>
+            <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <a class="nav-link" href="index.html">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Dashboard
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid">
+                        <h1 class="mt-4">Dashboard</h1>
+                        <div class="row">
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-primary text-white mb-4">
+                                    <div class="card-body">Primary Card</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a class="small text-white stretched-link" href="#">View Details</a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-warning text-white mb-4">
+                                    <div class="card-body">Warning Card</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a class="small text-white stretched-link" href="#">View Details</a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-success text-white mb-4">
+                                    <div class="card-body">Success Card</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a class="small text-white stretched-link" href="#">View Details</a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-danger text-white mb-4">
+                                    <div class="card-body">Danger Card</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a class="small text-white stretched-link" href="#">View Details</a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-chart-area mr-1"></i>
+                                        Area Chart
+                                    </div>
+                                    <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-chart-bar mr-1"></i>
+                                        Bar Chart
+                                    </div>
+                                    <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table mr-1"></i>
+                                DataTable
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <td>Nombre</td>
+                                                <td>Position</td>
+                                                <td>Ciudad Resiencia</td>
+                                                <td>Habilidad</td>
+                                                <td>Telefono</td>
+                                                <td>Correo</td>
+                                             </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <td>Nombre</td>
+                                                <td>Position</td>
+                                                <td>Ciudad Resiencia</td>
+                                                <td>Habilidad</td>
+                                                <td>Telefono</td>
+                                                <td>Correo</td>
+                                             </tr>
+                                        </tfoot>
+                                        <tbody>
+                                             <tr>
+                                                <td>Brena</td>
+                                                <td>Budget/Accounting Analyst II</td>
+                                                <td>Zaki Biam</td>
+                                                <td>OCLC Connexion</td>
+                                                <td>474-20-9102</td>
+                                                <td>bquarry0@tinyurl.com</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Kip</td>
+                                                <td>Human Resources Manager</td>
+                                                <td>Oslo</td>
+                                                <td>CX</td>
+                                                <td>280-42-0067</td>
+                                                <td>kcreed1@aol.com</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Rufus</td>
+                                                <td>VP Sales</td>
+                                                <td>Kontiolahti</td>
+                                                <td>QLab</td>
+                                                <td>681-37-1358</td>
+                                                <td>rgrishelyov2@posterous.com</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Delphine</td>
+                                                <td>Human Resources Manager</td>
+                                                <td>Tabalosos</td>
+                                                <td>Residential Homes</td>
+                                                <td>458-80-7786</td>
+                                                <td>dsurgenor3@disqus.com</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Fleurette</td>
+                                                <td>Accountant I</td>
+                                                <td>Uba</td>
+                                                <td>Fluorescence Microscopy</td>
+                                                <td>175-46-2306</td>
+                                                <td>ftregoning4@berkeley.edu</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Frank</td>
+                                                <td>VP Product Management</td>
+                                                <td>Tanjiaqiao</td>
+                                                <td>Epi Info</td>
+                                                <td>389-08-9565</td>
+                                                <td>fmcilmorie5@goo.gl</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Jordan</td>
+                                                <td>Community Outreach Specialist</td>
+                                                <td>Kibiya</td>
+                                                <td>ODS</td>
+                                                <td>827-50-3595</td>
+                                                <td>jnickless6@apple.com</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Yurik</td>
+                                                <td>Project Manager</td>
+                                                <td>Karangboyo</td>
+                                                <td>PFT</td>
+                                                <td>759-03-2967</td>
+                                                <td>ylefeaver7@homestead.com</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Ira</td>
+                                                <td>Analyst Programmer</td>
+                                                <td>Taoyuan</td>
+                                                <td>AJAX Toolkit</td>
+                                                <td>423-94-0324</td>
+                                                <td>ifrickey8@creativecommons.org</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Manfred</td>
+                                                <td>Automation Specialist I</td>
+                                                <td>Dengfang</td>
+                                                <td>Curriculum Development</td>
+                                                <td>896-61-0949</td>
+                                                <td>mmil9@aol.com</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Afton</td>
+                                                <td>Clinical Specialist</td>
+                                                <td>Hila</td>
+                                                <td>Honeywell DCS</td>
+                                                <td>264-10-9474</td>
+                                                <td>asevera@eepurl.com</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Christin</td>
+                                                <td>Software Consultant</td>
+                                                <td>Mahābād</td>
+                                                <td>Hodes IQ</td>
+                                                <td>877-04-3529</td>
+                                                <td>ccollcuttb@wp.com</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Enrique</td>
+                                                <td>Engineer III</td>
+                                                <td>Lunik</td>
+                                                <td>MBR</td>
+                                                <td>122-63-0266</td>
+                                                <td>ecridlandc@mayoclinic.com</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Halli</td>
+                                                <td>GIS Technical Architect</td>
+                                                <td>Nazareth</td>
+                                                <td>Ministry Of Defence</td>
+                                                <td>333-65-0475</td>
+                                                <td>haskewd@oaic.gov.au</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Desiri</td>
+                                                <td>Nurse</td>
+                                                <td>Boje</td>
+                                                <td>DTA</td>
+                                                <td>320-34-7015</td>
+                                                <td>dwellsteade@sbwire.com</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Dav</td>
+                                                <td>Actuary</td>
+                                                <td>Tân Phú</td>
+                                                <td>Yelp</td>
+                                                <td>109-05-4974</td>
+                                                <td>dpoleyef@studiopress.com</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Robinet</td>
+                                                <td>Accountant I</td>
+                                                <td>Balungao</td>
+                                                <td>Knowledge Base</td>
+                                                <td>341-49-2231</td>
+                                                <td>rhanmerg@examiner.com</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Virginie</td>
+                                                <td>Geologist I</td>
+                                                <td>Ar Ru’ays</td>
+                                                <td>Drilling</td>
+                                                <td>604-55-7674</td>
+                                                <td>vdewberryh@whitehouse.gov</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Matias</td>
+                                                <td>Structural Engineer</td>
+                                                <td>Zaragoza</td>
+                                                <td>Juvenile Justice</td>
+                                                <td>247-07-6748</td>
+                                                <td>mmusselwhitei@sohu.com</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Adrea</td>
+                                                <td>Recruiter</td>
+                                                <td>Zapatero</td>
+                                                <td>IR</td>
+                                                <td>779-39-8176</td>
+                                                <td>aspinksj@washington.edu</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Lesley</td>
+                                                <td>Occupational Therapist</td>
+                                                <td>Donnycarney</td>
+                                                <td>Non-compete Agreements</td>
+                                                <td>207-12-0678</td>
+                                                <td>lfogelk@barnesandnoble.com</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Rozella</td>
+                                                <td>Associate Professor</td>
+                                                <td>Mundri</td>
+                                                <td>PCP</td>
+                                                <td>316-68-8002</td>
+                                                <td>roswelll@cnn.com</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Caressa</td>
+                                                <td>Social Worker</td>
+                                                <td>Göteborg</td>
+                                                <td>Quality Management</td>
+                                                <td>898-65-7829</td>
+                                                <td>cscaleram@bloomberg.com</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Sergei</td>
+                                                <td>Assistant Professor</td>
+                                                <td>Owando</td>
+                                                <td>MLRO</td>
+                                                <td>248-87-4062</td>
+                                                <td>sstaiten@sourceforge.net</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Zitella</td>
+                                                <td>Actuary</td>
+                                                <td>Lyalichi</td>
+                                                <td>Training Delivery</td>
+                                                <td>827-85-0395</td>
+                                                <td>zscotfurtho@tmall.com</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Jorie</td>
+                                                <td>Design Engineer</td>
+                                                <td>Cherëmukhovo</td>
+                                                <td>Logic Pro</td>
+                                                <td>288-90-3313</td>
+                                                <td>jcastellp@gravatar.com</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Sherline</td>
+                                                <td>Office Assistant II</td>
+                                                <td>Michałów-Reginów</td>
+                                                <td>Functional Specifications</td>
+                                                <td>504-59-7498</td>
+                                                <td>salbrookq@blogtalkradio.com</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Eamon</td>
+                                                <td>Design Engineer</td>
+                                                <td>Margita</td>
+                                                <td>Food Industry</td>
+                                                <td>533-89-6062</td>
+                                                <td>eboodler@toplist.cz</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Edlin</td>
+                                                <td>Compensation Analyst</td>
+                                                <td>Sīlat al Ḩārithīyah</td>
+                                                <td>MPEG</td>
+                                                <td>204-63-1857</td>
+                                                <td>ewhatleys@berkeley.edu</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Dorey</td>
+                                                <td>Tax Accountant</td>
+                                                <td>Aga</td>
+                                                <td>Telecom BSS</td>
+                                                <td>614-84-5692</td>
+                                                <td>dlissandrit@alibaba.com</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Ikey</td>
+                                                <td>Executive Secretary</td>
+                                                <td>Daloa</td>
+                                                <td>Kaizen Blitz</td>
+                                                <td>437-25-6614</td>
+                                                <td>imarshmanu@fema.gov</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Tedd</td>
+                                                <td>Quality Control Specialist</td>
+                                                <td>Tarimbang</td>
+                                                <td>Wrongful Death</td>
+                                                <td>893-20-5527</td>
+                                                <td>tpetyakovv@boston.com</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Jackie</td>
+                                                <td>Actuary</td>
+                                                <td>Pulau Tiga</td>
+                                                <td>Orthopedics</td>
+                                                <td>735-71-7864</td>
+                                                <td>jhannabusw@npr.org</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Dorthy</td>
+                                                <td>Engineer I</td>
+                                                <td>Kawahmanuk</td>
+                                                <td>HDTV</td>
+                                                <td>416-13-9572</td>
+                                                <td>drubertellix@hud.gov</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Lynnette</td>
+                                                <td>Automation Specialist II</td>
+                                                <td>Fornos</td>
+                                                <td>Qmail</td>
+                                                <td>144-91-7479</td>
+                                                <td>lhazeldeney@ucla.edu</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Rikki</td>
+                                                <td>Senior Developer</td>
+                                                <td>Bagenalstown</td>
+                                                <td>Agrochemicals</td>
+                                                <td>586-10-4097</td>
+                                                <td>rhardbattlez@archive.org</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Keane</td>
+                                                <td>Librarian</td>
+                                                <td>Krutaya Gorka</td>
+                                                <td>Easily Adaptable</td>
+                                                <td>465-84-3503</td>
+                                                <td>khekkert10@exblog.jp</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Lamond</td>
+                                                <td>Web Developer IV</td>
+                                                <td>Rrapë</td>
+                                                <td>CGI programming</td>
+                                                <td>335-58-2259</td>
+                                                <td>lhabbeshaw11@smugmug.com</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Astrid</td>
+                                                <td>Legal Assistant</td>
+                                                <td>Rosice</td>
+                                                <td>Home Equity Lines of Credit</td>
+                                                <td>691-22-4223</td>
+                                                <td>apfaffe12@wp.com</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Karen</td>
+                                                <td>Legal Assistant</td>
+                                                <td>Gózd</td>
+                                                <td>WWII</td>
+                                                <td>549-56-9155</td>
+                                                <td>kdobie13@rambler.ru</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Corliss</td>
+                                                <td>VP Marketing</td>
+                                                <td>Achiras</td>
+                                                <td>WSS 2.0</td>
+                                                <td>289-23-1550</td>
+                                                <td>ckingzet14@cdbaby.com</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Timmy</td>
+                                                <td>Research Nurse</td>
+                                                <td>Khāliş</td>
+                                                <td>NICE Call Recording</td>
+                                                <td>282-82-2375</td>
+                                                <td>twimmer15@sohu.com</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Noak</td>
+                                                <td>Payment Adjustment Coordinator</td>
+                                                <td>Mahébourg</td>
+                                                <td>TyMetrix</td>
+                                                <td>390-54-0337</td>
+                                                <td>nurrey16@g.co</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Dee</td>
+                                                <td>Design Engineer</td>
+                                                <td>Haoxin</td>
+                                                <td>Ionic Liquids</td>
+                                                <td>224-59-9249</td>
+                                                <td>dellens17@github.io</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Roana</td>
+                                                <td>Recruiter</td>
+                                                <td>Bāglung</td>
+                                                <td>SOA BPEL</td>
+                                                <td>739-57-9013</td>
+                                                <td>rsmorthwaite18@paypal.com</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Lorrie</td>
+                                                <td>Senior Cost Accountant</td>
+                                                <td>Sahagún</td>
+                                                <td>Uniform Combined State Law</td>
+                                                <td>501-28-8359</td>
+                                                <td>lmaffioni19@parallels.com</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Arabella</td>
+                                                <td>Tax Accountant</td>
+                                                <td>Khūgyāṉī</td>
+                                                <td>MCSA + Messaging</td>
+                                                <td>518-36-4063</td>
+                                                <td>afine1a@unc.edu</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Oran</td>
+                                                <td>Account Representative III</td>
+                                                <td>Lyon</td>
+                                                <td>Start-up Consulting</td>
+                                                <td>417-62-7659</td>
+                                                <td>orolance1b@google.pl</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Jonathon</td>
+                                                <td>Sales Associate</td>
+                                                <td>Paderne</td>
+                                                <td>ICT Governance</td>
+                                                <td>857-77-1384</td>
+                                                <td>jcouldwell1c@a8.net</td>
+                                             </tr>
+                                             <tr>
+                                                <td>Yoko</td>
+                                                <td>Programmer II</td>
+                                                <td>Xujiadian</td>
+                                                <td>PDS</td>
+                                                <td>499-72-1201</td>
+                                                <td>ymaty1d@rambler.ru</td>
+                                             </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; Your Website 2020</div>
+                            <div>
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="js/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="assets/demo/chart-area-demo.js"></script>
+        <script src="assets/demo/chart-bar-demo.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+        <script src="assets/demo/datatables-demo.js"></script>
+    </body>
+</html>
