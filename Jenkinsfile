@@ -4,9 +4,6 @@ pipeline {
         PROJECT_ID = 'ggamboac-201504429-01'
         CREDENTIALS_ID = 'ggamboac-201504429-01'
 
-        CLUSTER_NAME = 'devops'
-        LOCATION = 'us-central1-c'        
-
         CLUSTER_NAME_TEST = 'devops-demo-test'
         LOCATION_TEST = 'us-east1-c'
 

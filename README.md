@@ -144,3 +144,150 @@ Jenkins necesita autenticarse frente a Google Cloud Platform y DockerHub para ha
 
 ![](docs/img/credencials-google.PNG)
 
+## Paso 4: Proyecto
+
+
+1.  Crear clusters a ser utilizados para desplegar el proyecto, se debe identificar 1 como pruebas y otro como producción.
+
+![](docs/img/cluster-crear.PNG)
+
+2. [Crear repositorio en DockerHub](https://hub.docker.com/repository/create)
+
+Creación del repositorio en docker hub a utilizar
+
+![](docs/img/dockerhub-crear.PNG)
+
+
+3.  Configurar Cluster's, proyecto y zonas del proyecto
+
+En el archivo Jenkinsfile de la raiz del proyecto se debe configurar los siguientes parametros:
+
+   ```
+   PROJECT_ID = <PROYECTO GOOGLE CLOUD>
+   CREDENTIALS_ID = <CREDENCIAL CREADA EN JENKINS>    
+   
+   CLUSTER_NAME_TEST = <NOMBRE DEL CLUSTER TEST> 
+   LOCATION_TEST = <UBICACIÓN DEL CLUSTER TEST>
+   
+   CLUSTER_NAME_PROD = <NOMBRE DEL CLUSTER PROD>
+   LOCATION_PROD = <UBICACIÓN DEL CLUSTER PROD>
+   
+   ```
+
+![](docs/img/cluster-codigo.PNG)
+
+
+4. Cofigurar repositorio de DockerHub
+
+
+Nombre del repositorio de DockerHub: <DOCKERHUB NOMBRE> en el archivo deployment.yaml
+
+   ```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devops-demo-app
+spec:
+  selector:
+    matchLabels:
+      app: devops-demo
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: devops-demo
+    spec:
+      containers:
+      - name: devops-demo
+        image: "<DOCKERHUB NOMBRE>/devops-demo:latest"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: ilb-service
+  annotations:
+    cloud.google.com/load-balancer-type: "External"
+  labels:
+    app: devops-demo
+spec:
+  type: LoadBalancer
+  selector:
+    app: devops-demo
+  ports:
+  - port: 80
+    targetPort: 5000
+    protocol: TCP
+
+   ```
+
+
+Nombre del repositorio de DockerHub: <DOCKERHUB NOMBRE> en el archivo Jenkinsfile
+
+   ```
+
+
+pipeline {
+    agent any
+    environment {
+        PROJECT_ID = 'ggamboac-201504429-01'
+        CREDENTIALS_ID = 'ggamboac-201504429-01'    
+
+        CLUSTER_NAME_TEST = 'devops-demo-test'
+        LOCATION_TEST = 'us-east1-c'
+
+        CLUSTER_NAME_PROD = 'devops-demo-prod'
+        LOCATION_PROD = 'us-west1-a'
+                       
+    }
+    stages {
+        stage("Checkout code") {
+            steps {
+                checkout scm
+            }
+        }
+        stage("Instalación de Dependencias") {
+            steps {
+                sh "npm install"    
+                sh "npm install mocha --save"                                
+            }
+        }        
+        stage("Pruebas de calidad de Software") {
+            steps {
+                sh "npm run test"
+            }
+        }                
+        stage("Construir Imagen") {
+            steps {
+                script {
+                    myapp = docker.build("<DOCKERHUB NOMBRE>/devops-demo:${env.BUILD_ID}")
+                }
+            }
+        }
+        stage("Publicar Imagen") {
+            steps {
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                            myapp.push("latest")
+                            myapp.push("${env.BUILD_ID}")
+                    }
+                }
+            }
+        }    
+        stage('Desplegar en Pruebas') {
+            steps{
+                sh "sed -i 's/devops-demo:latest/devops-demo:${env.BUILD_ID}/g' deployment.yaml"
+                step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME_TEST, location: env.LOCATION_TEST, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
+            }
+        }        
+        stage('Despliegue en Producción') {
+            steps{                                                         
+                input message:"¿Autorizar Despliegue?"
+                step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME_PROD, location: env.LOCATION_PROD, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true]) 
+            }
+        }
+    }    
+}
+
+   ```
