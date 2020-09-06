@@ -314,6 +314,10 @@ El cambio en el repositorio incializa el pipeline creado en Jenkins
 ![](docs/img/deploy-devops.PNG)
 
 
+Acceder a servicios publicados.
+
+![](docs/img/servicios.PNG)
+
 
 Estado inicial del Cluster de Producción
 
@@ -347,7 +351,24 @@ Cambiar el texto "Devops-Demo-Test v1" a "Devops-Demo-Test v2"
    ```   
 
 
+Inicio del Pipeline con Pausa en previo a publicación en servicios de producción.
 
-Acceder a servicios publicados.
+![](docs/img/estado02.PNG)
 
-![](docs/img/servicios.PNG)
+
+Revisión del Cluster Test, podemos notar que el cambio se encuentra en Test pero no en Producción
+
+![](docs/img/estado03.PNG)
+
+
+Autorización a despliegue en Producción
+
+![](docs/img/estado04.PNG)
+
+Tanto producción como pruebas reflejan los mismos cambios
+
+![](docs/img/estado05.PNG)
+
+
+
+
