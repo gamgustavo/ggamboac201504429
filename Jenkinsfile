@@ -20,25 +20,25 @@ pipeline {
                 checkout scm
             }
         }
-        stage("Install Dependencies") {
+        stage("Instalación de Dependencias") {
             steps {
                 sh "npm install"    
                 sh "npm install mocha --save"                                
             }
         }        
-        stage("Run Test") {
+        stage("Pruebas de calidad de Software") {
             steps {
                 sh "npm run test"
             }
         }                
-        stage("Build image") {
+        stage("Construir Imagen") {
             steps {
                 script {
                     myapp = docker.build("gustavogamboa/devops-demo:${env.BUILD_ID}")
                 }
             }
         }
-        stage("Push image") {
+        stage("Publicar Imagen") {
             steps {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
@@ -48,13 +48,13 @@ pipeline {
                 }
             }
         }    
-        stage('Deploy devops-demo-test') {
+        stage('Desplegar en Pruebas') {
             steps{
                 sh "sed -i 's/devops-demo:latest/devops-demo:${env.BUILD_ID}/g' deployment.yaml"
                 step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME_TEST, location: env.LOCATION_TEST, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
             }
         }        
-        stage('Deploy devops-demo-prod') {
+        stage('Despliegue en Producción') {
             steps{                                                         
                 input message:"¿Autorizar Despliegue?"
                 step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME_PROD, location: env.LOCATION_PROD, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true]) 
