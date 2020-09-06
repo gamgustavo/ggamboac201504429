@@ -27,4 +27,4 @@
 
 Es necesario crear un [Corta Fuegos](https://console.cloud.google.com/networking/firewalls/) el cual nos permita el uso de los diferentes puertos utilizados por nuestras instancias, en este caso nuestro servidor de integración continua necesita utilizar el puerto 8080, para fines el ejemplo habilitaremos toda la comunicación
 
-![](docs/img/crear-firewall.png)
+![](docs/img/crear-firewall .png)
