@@ -309,25 +309,29 @@ git push origin master                          # Publicar el Cambio en rama mas
    ```
 
 
-El cambio en el repositorio incializa el pipeline creado en Jenkins
+-   El cambio en el repositorio incializa el pipeline creado en Jenkins
 
 ![](docs/img/deploy-devops.PNG)
 
 
-Acceder a servicios publicados.
+-   Acceder a servicios publicados.
+
+
 
 ![](docs/img/servicios.PNG)
 
 
-Estado inicial del Cluster de Producción
+
+-   Estado inicial del Cluster de Producción
 
 
 ![](docs/img/estado01.PNG)
 
 
-Cambio en el archivo /src/index.html  
 
-Cambiar el texto "Devops-Demo-Test v1" a "Devops-Demo-Test v2"
+-   Cambio en el archivo /src/index.html: sustituir el texto "Devops-Demo-Test v1" a "Devops-Demo-Test v2"
+
+
 
    ```html
 <!DOCTYPE html>
@@ -351,21 +355,30 @@ Cambiar el texto "Devops-Demo-Test v1" a "Devops-Demo-Test v2"
    ```   
 
 
-Inicio del Pipeline con Pausa en previo a publicación en servicios de producción.
+
+-   Inicio del Pipeline con Pausa previo a publicación en servicios de producción.
+
 
 ![](docs/img/estado02.PNG)
 
 
-Revisión del Cluster Test, podemos notar que el cambio se encuentra en Test pero no en Producción
+
+-   Revisión del Cluster Test, podemos notar que el cambio se encuentra en Test pero no en Producción
+
+
 
 ![](docs/img/estado03.PNG)
 
 
-Autorización a despliegue en Producción
+
+-   Autorización a despliegue en Producción
+
 
 ![](docs/img/estado04.PNG)
 
-Tanto producción como pruebas reflejan los mismos cambios
+
+-   Tanto producción como pruebas reflejan los mismos cambios
+
 
 ![](docs/img/estado05.PNG)
 
