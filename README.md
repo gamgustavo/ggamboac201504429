@@ -291,3 +291,24 @@ pipeline {
 }
 
    ```
+
+## Paso 4: Realizar Pruebas de Despliegues
+
+
+
+   ```shell
+
+git config --global user.name "NAME"            # Nombre Usuario Git Hub
+git config --global user.name "EMAIL-ADDRESS"   # Email registrado en GitHub
+git init                                        # Inicializa el repositorio
+git remote add origin CLONE-URL                 # Clonar Repositorio
+git add .                                       # Agregar Cambios a commit
+git commit -m "Initial commit"                  # Nombrar el commit
+git push origin master                          # Publicar el Cambio en rama master
+
+   ```
+
+El cambio en el repositorio incializa el pipeline creado en Jenkins
+
+![](docs/img/deploy-devops.PNG)
+
