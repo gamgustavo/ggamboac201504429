@@ -41,9 +41,9 @@
         - [Actualizar NodeJs a version v12.18.3](https://matthiashoys.wordpress.com/2020/01/15/how-to-upgrade-node-js-from-v6-to-v12-on-centos-linux-7/) o superior
 
     -   Instalar Plugins Jenkins
-            - Ir a Administrar Jenkins -> Administrar Pluging e Instalar los complementos:
-                - Docker Pipeline
-                - Google Kubernetes Engine
+        -   Ir a Administrar Jenkins -> Administrar Pluging e Instalar los complementos:
+            - Docker Pipeline
+            - Google Kubernetes Engine
 
 ![](docs/img/jenkins-docker-pipeline.PNG)
 ![](docs/img/jenkins-docker-kubectl.PNG)
