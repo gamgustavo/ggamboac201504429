@@ -49,15 +49,20 @@ pipeline {
             }
         }    
         stage('Deploy to GKE test cluster') {
+            when { branch 'master' }
             steps{
-                sh "sed -i 's/devops-demo:latest/devops-demo:${env.BUILD_ID}/g' deployment.yaml"
-                step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME_TEST, location: env.LOCATION_TEST, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
+                sh("kubectl get ns production  ||  kubectl create ns production ")
+                sh "sed -i 's/devops-demo:latest/devops-demo:${env.BUILD_ID}/g' ./k8s/production/*.yaml"
+                step([$class: 'KubernetesEngineBuilder', namespace:'production', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME_TEST, location: env.LOCATION_TEST, manifestPattern: './k8s/services/*.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])                
+                step([$class: 'KubernetesEngineBuilder', namespace:'production', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME_TEST, location: env.LOCATION_TEST, manifestPattern: './k8s/production/*.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
             }
         }        
         stage('Deploy to GKE production cluster') {
+            when { branch 'master' }
             steps{                                                         
                 input message:"Proceed with final deployment?"
-                step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME_PROD, location: env.LOCATION_PROD, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
+                step([$class: 'KubernetesEngineBuilder', namespace: 'production', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME_PROD, location: env.LOCATION_PROD, manifestPattern: './k8s/services/*.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])                
+                step([$class: 'KubernetesEngineBuilder', namespace: 'production', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME_PROD, location: env.LOCATION_PROD, manifestPattern: './k8s/production/*.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
             }
         }
     }    
