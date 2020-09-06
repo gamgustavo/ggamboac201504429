@@ -12,6 +12,9 @@
 
 ![](docs/img/Arquitectura.png)
 
+## Pipeline Devops
+
+![](docs/img/flujo.png)
 
 ## Paso 1: Intalación y configuración Servidor de Integración Continua
 
@@ -41,7 +44,7 @@
     -   [Instalar NodeJS](https://www.ochobitshacenunbyte.com/2019/01/23/instalar-node-js-y-npm-en-centos-7/) v12.18.3 o superior
         - [Actualizar NodeJs a version v12.18.3](https://matthiashoys.wordpress.com/2020/01/15/how-to-upgrade-node-js-from-v6-to-v12-on-centos-linux-7/) o superior
 
-    -   Instalar Plugins Jenkinscon
+    -   Instalar Plugins Jenkins
         -   Ir a Administrar Jenkins -> Administrar Pluging e Instalar los complementos:
             - Docker Pipeline
             - Google Kubernetes Engine
@@ -56,9 +59,9 @@ Webhook son eventos que desencadenan acciones, de tal forma que este será el in
 
 -   [Inicio de sesión](https://github.com/login)
 -   [Crear nuevo Repositorio](https://github.com/new)
--   Ir: Configuraciónes -> WeWebhook -> Agregar Webhook
+-   Ir: Configuraciónes -> Webhook -> Agregar Webhook
 
-En la url colocar http://<IP_SERVIDOR_JENKINS:PUERTO>/github-webhook/ donde se debe sustituir la dirección y el puerto utilizado por el servidor Jenkin asi como definir el parametro "Just the push event"
+En la url colocar http://<IP_SERVIDOR_JENKINS:PUERTO>/github-webhook/ donde se debe sustituir la dirección y el puerto utilizado por el servidor Jenkins asi como definir el parametro "Just the push event"
 
 ![](docs/img/crear-webhook.PNG)
 
@@ -67,7 +70,7 @@ En la url colocar http://<IP_SERVIDOR_JENKINS:PUERTO>/github-webhook/ donde se d
 
 -   Habilitar APIS de google Cloud
 
-    -   [Ir a Biblioteca de APIS y servicios](https://console.cloud.google.com/apis/library) y habilitar las siguientes opciones
+    -   [Ir a Biblioteca de APIS y servicios](https://console.cloud.google.com/apis/library) y habilitar las siguientes opciones:
         -   Compute Engine API
         -   Kubernetes Engine API
         -   Service Management API
@@ -75,19 +78,69 @@ En la url colocar http://<IP_SERVIDOR_JENKINS:PUERTO>/github-webhook/ donde se d
         
 -   Cuenta de servicio Google Cloud
 
-Es una cuenta que permite a aplicaciones externas interactuar con las APIS de google cloud y realizar diversas acciones dentro de los permisos inicialmete.
+Es una cuenta que permite a aplicaciones externas interactuar con las APIS de google cloud y realizar diversas acciones dentro de los permisos otorgados.
 
--   Inicio y selección de proyecto utilizado
--   IAM y Administración -> Cuentas de Servicio -> Crear Cuenta de Servicio
+-   Iniciar sesión y seleccionar el proyecto utilizado
+-   Ir a: IAM y Administración -> Cuentas de Servicio -> Crear Cuenta de Servicio
 -   Colocar Nombre y descripción para la cuenta de servicio
 
 
 ![](docs/img/cuenta-servicio-nombre.PNG)
 
 -   Asignar roles a cuenta de servicio
+    -   Compute Engine API
+    -   Kubernetes Engine API
+    -   Service Management API
+    -   Cloud Resource Manager API
 
 ![](docs/img/cuenta-servicio-roles.PNG)
 
--   Crear Key en formato JSON, guardar este archivo que se utilizara en el servidor de integración continua.
+-   Crear Key en formato JSON, guardar archivo, se utilizara en el servidor de integración continua.
 
 ![](docs/img/cuneta-servicio-credencial.PNG)
+
+
+
+## Paso 3: Creación Pipeline
+
+-   Ingresar a Jenkins
+-   Creación de proyecto en Jenkins
+
+![](docs/img/pipeline-crear.PNG)
+
+-   En el Tab "General" Seleccionar la url del repositorio utilizado por el proyecto
+
+![](docs/img/pipeline-url.PNG)
+
+-   En el Tab "Build Trigger" Seleccionar: GitHub hook trigger GITScm polling, el cual indica que se utilizara un WebHook como iniciador del flujo de integracion.
+
+![](docs/img/pipeline-trigger.PNG)
+
+-   En el Tab "Pipeline" Seleccionar: Pipeline script from SCM el cual indica que se utilizara un script para la creación del pipeline, el cual se encuentra en el repositrio de versiones, también se se establece las ramas que se desea utilizar en el flujo.
+
+![](docs/img/pipeline-pipeline.PNG)
+
+
+## Paso 4: Configuraicón credenciales en JENKINS
+
+Jenkins necesita autenticarse frente a Google Cloud Platform y DockerHub para habilitar la comunicación.
+
+-   Ir a: Administrar Jenkins -> Manage Credentials -> En el sub meno de "Global credentials" click en Agregar
+
+-   Configurar DockerHub: 
+    -   Kind: Username y Password como metodo de autenticación 
+    -   Scope: Global
+    -   Username: Usuario DockerHub
+    -   Password: Clave DockerHub
+    -   Id: dockerhub 
+    -   Descripción
+
+![](docs/img/credencials-dockerhub.PNG)
+
+-   Configurar Google Cloud Platform
+    -   Kind: Google Service Account from private Key
+    -   Project name: Nombre del Proyecto en Google Cloud
+    -   JSON key: Archivo private Key, generado en la cuenta de servicio
+
+![](docs/img/credencials-google.PNG)
+

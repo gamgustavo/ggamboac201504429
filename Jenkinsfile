@@ -48,15 +48,15 @@ pipeline {
                 }
             }
         }    
-        stage('Deploy to GKE test cluster') {
+        stage('Deploy devops-demo-test') {
             steps{
                 sh "sed -i 's/devops-demo:latest/devops-demo:${env.BUILD_ID}/g' deployment.yaml"
                 step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME_TEST, location: env.LOCATION_TEST, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
             }
         }        
-        stage('Deploy to GKE production cluster') {
+        stage('Deploy devops-demo-prod') {
             steps{                                                         
-                input message:"Proceed with final deployment?"
+                input message:"¿Autorizar Despliegue?"
                 step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME_PROD, location: env.LOCATION_PROD, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true]) 
             }
         }
