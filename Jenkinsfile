@@ -49,7 +49,7 @@ pipeline {
             }
         }    
         stage('Deploy to GKE test cluster') {
-            when { branch 'master' }
+
             steps{
                 sh("kubectl get ns production  ||  kubectl create ns production ")
                 sh "sed -i 's/devops-demo:latest/devops-demo:${env.BUILD_ID}/g' ./k8s/production/*.yaml"
@@ -58,7 +58,6 @@ pipeline {
             }
         }        
         stage('Deploy to GKE production cluster') {
-            when { branch 'master' }
 
             steps{                                                         
                 input message:"Proceed with final deployment?"
