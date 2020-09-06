@@ -312,3 +312,7 @@ El cambio en el repositorio incializa el pipeline creado en Jenkins
 
 ![](docs/img/deploy-devops.PNG)
 
+
+Acceder a servicios publicados
+
+![](docs/img/servicios.PNG)
