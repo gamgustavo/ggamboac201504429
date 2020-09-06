@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hello-app
+  name: devops-demo-app
 spec:
   selector:
     matchLabels:
-      app: hello
+      app: devops-demo
   replicas: 3
   template:
     metadata:
       labels:
-        app: hello
+        app: devops-demo
     spec:
       containers:
-      - name: hello
-        image: "gustavogamboa/hello:latest"
+      - name: devops-demo
+        image: "gustavogamboa/devops-demo:latest"
 
 ---
 
@@ -25,11 +25,11 @@ metadata:
   annotations:
     cloud.google.com/load-balancer-type: "External"
   labels:
-    app: hello
+    app: devops-demo
 spec:
   type: LoadBalancer
   selector:
-    app: hello
+    app: devops-demo
   ports:
   - port: 80
     targetPort: 5000
