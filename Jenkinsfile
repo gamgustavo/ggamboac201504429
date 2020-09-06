@@ -59,6 +59,7 @@ pipeline {
         }        
         stage('Deploy to GKE production cluster') {
             when { branch 'master' }
+
             steps{                                                         
                 input message:"Proceed with final deployment?"
                 step([$class: 'KubernetesEngineBuilder', namespace: 'production', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME_PROD, location: env.LOCATION_PROD, manifestPattern: './k8s/services/*.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])                
