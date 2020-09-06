@@ -180,7 +180,7 @@ En el archivo Jenkinsfile de la raiz del proyecto se debe configurar los siguien
 4. Cofigurar repositorio de DockerHub
 
 
-Nombre del repositorio de DockerHub: < DOCKERHUB NOMBRE > en el archivo deployment.yaml
+Configurar nombre del repositorio de DockerHub: < DOCKERHUB NOMBRE > en el archivo deployment.yaml
 
    ```
 apiVersion: apps/v1
@@ -223,7 +223,7 @@ spec:
    ```
 
 
-Nombre del repositorio de DockerHub: < DOCKERHUB NOMBRE > en el archivo Jenkinsfile
+Configurar nombre del repositorio de DockerHub: < DOCKERHUB NOMBRE > en el archivo Jenkinsfile
 
    ```
 
